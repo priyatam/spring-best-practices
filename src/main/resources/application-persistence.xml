@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <!-- Setup a Connection Pool DataSource -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close"
+          p:driverClass="${jdbc.driverClass}"
+          p:jdbcUrl="${jdbc.url}" p:user="${jdbc.user}"
+          p:password="${jdbc.password}" p:acquireIncrement="10"
+          p:idleConnectionTestPeriod="60" p:maxStatements="50" p:minPoolSize="10"
+          p:maxPoolSize="50"/>
+
+    <!-- Initialize db -->
+    <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
+        <jdbc:script location="classpath:db/data.sql"/>
+    </jdbc:initialize-database>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="github.priyatam.springrest.domain"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="true"/>
+                <property name="database" value="H2"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManagerFactory"/>
+
+    <!--Enable Spring @Transactional semantics using proxies -->
+    <tx:annotation-driven/>
+
+</beans>

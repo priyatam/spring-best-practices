@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use a simple non-distributed cache -->
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+   <cache 
+        name="etags" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>
+        
+     <cache 
+        name="resource-status" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>
+              
+    <cache 
+        name="policies" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>
+        
+    <cache 
+        name="drivers" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>
+        
+    <cache 
+        name="vehicles" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>
+        
+    <cache 
+        name="policy-drivers" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>
+        
+    <cache 
+        name="policy-vehicles" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/> 
+        
+     <cache 
+        name="driving-history" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>        
+        
+     <cache 
+        name="driving-history-accidents" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>     
+        
+     <cache 
+        name="accidents" 
+        maxElementsInMemory="100"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="20"
+        memoryStoreEvictionPolicy="FIFO"
+        eternal="false" 
+        overflowToDisk="false"/>         
+        
+</ehcache>
