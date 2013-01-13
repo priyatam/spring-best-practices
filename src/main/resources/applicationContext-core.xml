@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+                 
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!-- Property file -->
+    <bean id="propertyPlaceholder"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="classpath:local.properties"
+          p:ignoreUnresolvablePlaceholders="true" p:order="1"/>
+
+    <!-- Scan Spring annotated components -->
+    <context:component-scan base-package="github.priyatam.springrest"/>
+    <context:annotation-config/>
+
+    <!-- Handle efficient GET requests for resources -->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <!-- MVC converters -->
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+        <mvc:message-converters>
+            <bean class="github.priyatam.springrest.utils.DefaultJacksonHttpMessageConverter"
+                  p:prettyPrint="${json.prettyprint}"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- Locales -->
+    <bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"/>
+
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="favorPathExtension" value="false"/>
+        <property name="favorParameter" value="false"/>
+        <property name="ignoreAcceptHeader" value="false"/>
+        <property name="mediaTypes">
+            <value>
+                html=text/html
+                json=application/json
+                *=*/*
+            </value>
+        </property>
+    </bean>
+
+    <!-- Repeated Converter since mvc:message-converters doesn't support ref -->
+    <bean id="jacksonHttpMessageConverter"
+          class="github.priyatam.springrest.utils.DefaultJacksonHttpMessageConverter"
+          p:prettyPrint="${json.prettyprint}"/>
+
+    <!--
+    <bean id="html" class="org.springframework.http.MediaType">
+        <constructor-arg>
+            <value><![CDATA[text/html]]></value>
+        </constructor-arg>
+    </bean>
+    <bean id="json" class="org.springframework.http.MediaType">
+        <constructor-arg>
+            <value><![CDATA[application/json]]></value>
+        </constructor-arg>
+    </bean>
+    -->
+
+    <!-- View Resolvers -->
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+                <bean id="viewResolver"
+                      class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+                      p:viewClass="org.springframework.web.servlet.view.JstlView"
+                      p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Routes -->
+    <mvc:view-controller path="/" view-name="home"/>
+    <mvc:view-controller path="/about" view-name="about"/>
+    <mvc:view-controller path="/quote" view-name="quote"/>
+    <mvc:view-controller path="/policies" view-name="/policies"/>
+
+    <!-- Setup REST Template -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Exception Resolvers -->
+    <bean id="annotationMethodHandlerExceptionResolver"
+          class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver"
+          p:order="0"/>
+    <bean id="restExceptionResolver"
+          class="com.stormpath.spring.web.servlet.handler.RestExceptionHandler"
+          p:order="100">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jacksonHttpMessageConverter"/>
+            </list>
+        </property>
+        <property name="errorResolver">
+            <bean
+                    class="com.stormpath.spring.web.servlet.handler.DefaultRestErrorResolver"
+                    p:localeResolver-ref="localeResolver">
+                <property name="exceptionMappingDefinitions">
+                    <map>
+                        <entry key="net.prcins.wara.ws.exception.PolicyInvalidException"
+                               value="412, 412XX, _exmsg"></entry>
+                        <entry key="Throwable" value="500, _msg, _exmsg"></entry>
+                    </map>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- Cache -->
+    <cache:annotation-driven/>
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
+          p:cache-manager-ref="ehcache"/>
+    <bean id="ehcache"
+          class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+
+    <!-- Aspects -->
+    <aop:aspectj-autoproxy/>
+
+    <!-- Interceptors -->
+    <bean id="performanceMonitor"
+          class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor"
+          p:useDynamicLogger="true"/>
+    <aop:config>
+        <aop:pointcut id="allMethods" expression="execution(* github.priyatam.springrest..*.*(..))"/>
+        <aop:advisor pointcut-ref="allMethods" advice-ref="performanceMonitor"/>
+    </aop:config>
+
+    <!-- Email -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="localhost"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <!-- prop key="mail.debug">true</prop> -->
+            </props>
+        </property>
+    </bean>
+
+    <!-- Enable Scheduling -->
+    <!--
+    <task:annotation-driven/>
+    -->
+
+</beans>

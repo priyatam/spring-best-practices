@@ -1,0 +1,47 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <global-method-security />
+    
+    <http auto-config="true">
+        <logout logout-url="/logout"/>
+        <!--
+        <intercept-url pattern="/" access="ROLE_USER"/>
+        <intercept-url pattern="/policies" access="ROLE_ADMIN"/>
+        -->
+        <remember-me token-repository-ref="tokenRepo" user-service-ref="securityHelper"/>
+        
+        <!--
+        <security:openid-login login-page="/index.xhtml" authentication-failure-url="/index.xhtml?login_error=true">
+            <security:attribute-exchange>
+              <security:openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true" count="2"/>
+              <security:openid-attribute name="name" type="http://schema.openid.net/namePerson/friendly" />
+            </attribute-exchange>
+        </security:openid-login>
+        -->        
+        
+    </http>
+
+    <authentication-manager erase-credentials="true">
+        <authentication-provider user-service-ref="securityHelper"/>
+    </authentication-manager>
+    
+    <beans:bean id="securityHelper" class="github.priyatam.springrest.helper.SecurityHelper" />
+
+    <beans:bean id="tokenRepo" class="org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl" />
+    
+    <!--
+    <authentication-provider>
+        <password-encoder hash="md5"/>
+        <user-service>
+            <security:user name="options" password="22b5c9accc6e1ba628cedc63a72d57f8" authorities="ROLE_USER" />
+        </user-service>
+    </authentication-provider>    
+    -->
+    
+</beans:beans>
