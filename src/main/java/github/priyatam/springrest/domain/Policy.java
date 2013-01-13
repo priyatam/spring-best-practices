@@ -9,6 +9,7 @@ import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 import github.priyatam.springrest.utils.Link;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
@@ -32,10 +33,14 @@ public final class Policy extends BaseDomain implements Comparable<Policy>, Seri
     private final String policyNum;
 
 	private final String company;
-	private final LocalDate effectiveDate;
+	
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")        
+    private final LocalDate effectiveDate;
+
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")        
+    private final LocalDate expiryDate;
 	private final String state;
 	private final Integer quote;
-	private final LocalDate expiryDate;
 	private final Integer term;
 	private final String declineReason;
 	private final String agency;

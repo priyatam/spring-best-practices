@@ -6,13 +6,11 @@ import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name="addresses")
 @NamedQuery(name = "Address.findByAddrLine1CityStateZip", query = "select o from Address o where o.addrLine1 = :addrLine1" +
         " and o.city = :city and o.state = :state and o.zip = :zip")
 public class Address extends BaseDomain implements Comparable<Address>, Serializable {

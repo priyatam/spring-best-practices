@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 import java.io.Serializable;
 
 @Entity
-@NamedQuery(name = "User.findByUsername", query = "select u from User u where u.username = :username")
+@NamedQuery(name = "User.FIND_BY_USERNAME", query = "select o from User o where o.username = :username")
 public class User extends BaseDomain implements Comparable<User>, Serializable {
 
     @Column(unique = true)

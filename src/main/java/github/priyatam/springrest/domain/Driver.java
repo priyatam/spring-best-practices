@@ -8,6 +8,7 @@ import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 import github.priyatam.springrest.utils.Link;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
@@ -38,9 +39,13 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
     private final String licenseNum;
 
     private final String licenseState;
+       
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")    
     private final LocalDate licenseExpiryDate;
     private final String firstName;
     private final String lastName;
+    
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")    
     private final LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
@@ -49,7 +54,7 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
     private final String phone;
     private final String occupation;
     private final Integer firstLicenseAtAge;
-    private final boolean married;
+    private final Boolean isMarried;
     private final String priorCarrier;
 
     @OneToOne(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
@@ -73,7 +78,7 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
         this.lastName = builder.lastName;
         this.birthDate = builder.birthDate;
         this.gender = builder.gender;
-        this.married = builder.married;
+        this.isMarried = builder.isMarried;
         this.email = builder.email;
         this.phone = builder.phone;
         this.occupation = builder.occupation;
@@ -93,7 +98,7 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
         private String lastName;
         private LocalDate birthDate;
         private Gender gender;
-        private boolean married;
+        private boolean isMarried;
         private String email;
         private String phone;
         private String occupation;
@@ -141,8 +146,8 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
             return this;
         }
 
-        public Builder withMarried(boolean married) {
-            this.married = married;
+        public Builder withIsMarried(boolean isMarried) {
+            this.isMarried = isMarried;
             return this;
         }
 
@@ -226,8 +231,8 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
         return gender;
     }
 
-    public boolean isMarried() {
-        return married;
+    public boolean getIsMarried() {
+        return isMarried;
     }
 
     public String getEmail() {
@@ -263,7 +268,7 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
         Driver d = new Driver.Builder().withLicenseNum(licenseNum).withBirthDate(birthDate).withFirstName(firstName)
                 .withLastName(lastName).withLicenseExpiryDate(licenseExpiryDate).withGender(gender)
                 .withEmail(email).withPhone(phone).withOccupation(occupation)
-                .withFirstLicenseAtAge(firstLicenseAtAge).withMarried(married).withAddress(address)
+                .withFirstLicenseAtAge(firstLicenseAtAge).withIsMarried(isMarried).withAddress(address)
                 .withDrivingHistory(_drivingHistory) //~
                 .build();
         copyLinks(d);

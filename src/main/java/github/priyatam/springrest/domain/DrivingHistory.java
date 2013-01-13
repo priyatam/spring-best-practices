@@ -31,8 +31,8 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
 
     private final LocalDate purchaseOrLeasedDate;
     private final Integer annualMileage;
-    private final boolean garageParked;
-    private final boolean primaryOperator;
+    private final Boolean isGarageParked;
+    private final Boolean isPrimaryOperator;
 
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn
@@ -42,8 +42,8 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
         this.driverLicense = builder.driverLicense;
         this.purchaseOrLeasedDate = builder.purchaseOrLeasedDate;
         this.annualMileage = builder.annualMileage;
-        this.garageParked = builder.garageParked;
-        this.primaryOperator = builder.primaryOperator;
+        this.isGarageParked = builder.isGarageParked;
+        this.isPrimaryOperator = builder.isPrimaryOperator;
         this.accidents = builder.accidents;
     }
 
@@ -53,8 +53,8 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
         private String driverLicense;
         private LocalDate purchaseOrLeasedDate;
         private Integer annualMileage;
-        private boolean garageParked;
-        private boolean primaryOperator;
+        private Boolean isGarageParked;
+        private Boolean isPrimaryOperator;
         private List<Accident> accidents;
 
         public Builder() {
@@ -76,13 +76,13 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
             return this;
         }
 
-        public Builder withGarageParked(boolean garageParked) {
-            this.garageParked = garageParked;
+        public Builder withIsGarageParked(boolean isGarageParked) {
+            this.isGarageParked = isGarageParked;
             return this;
         }
 
-        public Builder withPrimaryOperator(boolean primaryOperator) {
-            this.primaryOperator = primaryOperator;
+        public Builder withIsPrimaryOperator(boolean isPrimaryOperator) {
+            this.isPrimaryOperator = isPrimaryOperator;
             return this;
         }
 
@@ -97,7 +97,7 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
         }
 
         private void validate() {
-            checkNotNull(driverLicense, "driverLicense may not be null");
+            
         }
     }
 
@@ -113,12 +113,12 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
         return annualMileage;
     }
 
-    public boolean isGarageParked() {
-        return garageParked;
+    public Boolean getIsGarageParked() {
+        return isGarageParked;
     }
 
-    public boolean isPrimaryOperator() {
-        return primaryOperator;
+    public Boolean getIsPrimaryOperator() {
+        return isPrimaryOperator;
     }
 
     public List<Accident> getAccidents() {

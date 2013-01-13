@@ -28,10 +28,9 @@ public class DomainTest {
     }
 
     @Test
-    @Ignore
     public void testJodaDate() throws IOException {
         LocalDate date = new LocalDate(2001, 5, 25);
-        assertEquals("[2001,05,25]", mapper.writeValueAsString(date));
+        assertEquals("[2001,5,25]", mapper.writeValueAsString(date));
     }
 
     @Test
@@ -77,14 +76,6 @@ public class DomainTest {
         Policy p = MockDataHelper.createPolicyFull("S123");
         mapper.writeValue(file("policy.json"), p);
         Policy result = mapper.readValue(file("policy.json"), Policy.class);
-        assertNotNull(result);
-    }
-
-    @Test
-    public void testPolicyWithEmpty() throws IOException {
-        Policy p = MockDataHelper.createPolicyEmpty("S123");
-        mapper.writeValue(file("policy-nulls.json"), p);
-        Policy result = mapper.readValue(file("policy-nulls.json"), Policy.class);
         assertNotNull(result);
     }
 
