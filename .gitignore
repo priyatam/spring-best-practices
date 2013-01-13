@@ -4,3 +4,11 @@
 .iml
 .idea
 target
+
+*.log
+
+logs/.DS_Store
+
+*.db
+
+*.iml
