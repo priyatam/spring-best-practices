@@ -10,18 +10,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.server.MockMvc;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.server.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.server.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.server.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.server.setup.MockMvcBuilders.webApplicationContextSetup;
+import static org.mockito.Matchers.contains;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(EnvironmentModeJUnitRunner.class)
-@ContextConfiguration(loader = WebContextLoader.class, locations = { "classpath:application-servlet.xml", "classpath*:application-persistence.xml"})
+@ContextConfiguration(loader = WebContextLoader.class, locations = {"classpath:applicationContext-core.xml", "classpath*:applicationContext-persistence.xml"})
 public class PolicyResourceTest {
 
 	@Autowired
@@ -33,7 +31,7 @@ public class PolicyResourceTest {
 
 	@Before
 	public void setup() {
-		this.mockMvc = webApplicationContextSetup(this.wac).build();
+		this.mockMvc = webAppContextSetup(this.wac).build();
 	}
 
 	@Test
@@ -52,8 +50,8 @@ public class PolicyResourceTest {
 		mockMvc.perform(
 					post("/policy")
 						.header("Content-Type", "application/json")
-						.body(mapper.writeValueAsBytes(policy)))
+						.content(mapper.writeValueAsBytes(policy)))
 					.andExpect(status().isAccepted())
-					.andExpect(header().string("Location", containsString("/future")));
+					.andExpect(header().string("Location", contains("/future")));
 	}
 }

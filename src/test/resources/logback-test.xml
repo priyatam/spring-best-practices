@@ -11,7 +11,7 @@
 	<logger name="org.springframework.beans" level="WARN" />
 	<logger name="org.springframework" level="WARN" />
     <logger name="org.apache.ibatis" level="WARN" />
-    <logger name="net.prcins.wara" level="INFO" />
+    <logger name="github.priyatam.springrest" level="INFO" />
 
 	<root level="WARN">
 		<appender-ref ref="STDOUT" />

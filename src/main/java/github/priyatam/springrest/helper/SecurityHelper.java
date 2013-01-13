@@ -1,6 +1,5 @@
 package github.priyatam.springrest.helper;
 
-import github.priyatam.springrest.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,17 +11,10 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.util.Collections;
 
-@Service
 public class SecurityHelper implements UserDetailsService {
 
     @Inject
     private PersistenceHelper persistenceHelper;
-
-    @PostConstruct
-    protected void initialize() {
-       // persistenceHelper.saveUser(new User("user", "demo", "ROLE_USER"));
-      //  persistenceHelper.saveUser(new User("admin", "admin", "ROLE_ADMIN"));
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -3,7 +3,6 @@ package github.priyatam.springrest.helper;
 import github.priyatam.springrest.domain.Policy;
 import github.priyatam.springrest.exception.PolicyInvalidException.ErrorCode;
 import com.google.common.base.Strings;
-import github.priyatam.springrest.domain.Policy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

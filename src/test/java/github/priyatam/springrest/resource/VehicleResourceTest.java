@@ -8,17 +8,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.server.MockMvc;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.server.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.server.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.server.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.server.setup.MockMvcBuilders.webApplicationContextSetup;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 @RunWith(EnvironmentModeJUnitRunner.class)
-@ContextConfiguration(loader = WebContextLoader.class, locations = { "classpath:application-servlet.xml", "classpath*:application-persistence.xml"})
+@ContextConfiguration(loader = WebContextLoader.class, locations = {"classpath:applicationContext-core.xml", "classpath*:applicationContext-persistence.xml"})
 public class VehicleResourceTest {
 
 	@Autowired
@@ -30,7 +29,7 @@ public class VehicleResourceTest {
 
 	@Before
 	public void setup() {
-		this.mockMvc = webApplicationContextSetup(this.wac).build();
+		this.mockMvc = webAppContextSetup(this.wac).build();
 	}
 
 	@Test

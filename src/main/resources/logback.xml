@@ -7,7 +7,7 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>logs/wara-ws.log</file>
+		<file>logs/application.log</file>
 
 		<encoder>
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
@@ -15,32 +15,14 @@
 		</encoder>
 	</appender>
 
-    <!--  
-	<appender name="SMTP" class="ch.qos.logback.classic.net.SMTPAppender">
-		<smtpHost>PRCRELAY.PRCINS.NET</smtpHost>
-		<to>pmudivarti@plymouthrock.com</to>
-		<from>pmudivarti@plymouthrock.com</from>
-		<subject>Prime - %mdc{number} by %mdc{userid} </subject>
-		<layout class="ch.qos.logback.classic.html.HTMLLayout">
-			<pattern>%date%level%logger{24}%msg</pattern>
-		</layout>
-
-		<evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
-			<expression>
-				marker != null && marker.contains("SMTP_TRIGGER")
-			</expression>
-		</evaluator>
-	</appender>
-	-->
-
 	<logger name="ch.qos.logback" level="WARN" />
 	<logger name="org.mortbay.log" level="WARN" />
 	<logger name="org.springframework" level="INFO" />
 	<logger name="org.springframework.beans" level="WARN" />
-	<logger name="org.mybatis" level="WARN" />
-    <logger name="net.prcins.wara" level="DEBUG" />
+	<logger name="org.ibatis" level="INFO" />
+    <logger name="github.priyatam.springrest" level="DEBUG" />
     
-	<root level="info">
+	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
 	</root>

@@ -15,6 +15,6 @@ public class EnvironmentModeJUnitRunner extends SpringJUnit4ClassRunner {
 
 	public static void initJvmParams() {
 		System.getProperties().put("properties.root", "classpath:");
-	    System.getProperties().put("environment.mode", "local");
+	    System.getProperties().put("env.mode", "local");
 	}
 }

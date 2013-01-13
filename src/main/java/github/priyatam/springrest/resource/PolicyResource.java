@@ -11,7 +11,7 @@ import github.priyatam.springrest.exception.PolicyInvalidException;
 import github.priyatam.springrest.exception.PolicyInvalidException.ErrorCode;
 import github.priyatam.springrest.helper.*;
 import github.priyatam.springrest.helper.ResponseBuilderHelper.URLS;
-import github.priyatam.springrest.task.PolicyAsyncTask;
+import github.priyatam.springrest.helper.PolicyAsyncHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +35,7 @@ public class PolicyResource {
     final static Logger logger = LoggerFactory.getLogger(PolicyResource.class);
 
     @Inject
-    private PolicyAsyncTask policyWorker;
+    private PolicyAsyncHelper policyWorker;
 
     @Inject
     protected ResourceHelper resourceHelper;
@@ -143,7 +143,7 @@ public class PolicyResource {
         logger.debug("Retrieving Driver for Policy :" + policyNum);
 
         // Load drivers
-        List<Driver> drivers = persistenceHelper.loadDrivers(policyNum);
+        List<Driver> drivers = persistenceHelper.loadDriverByPolicyNum(policyNum);
         if (drivers == null) {
             logger.warn("No Drivers found");
             return new ResponseEntity<List<Driver>>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);

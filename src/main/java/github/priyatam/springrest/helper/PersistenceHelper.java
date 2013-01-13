@@ -51,13 +51,6 @@ public class PersistenceHelper {
                 .getSingleResult();
     }
 
-    @Cacheable(value = "policy-drivers")
-    public List<Driver> loadDrivers(String policyNum) {
-        return entityManager.createNamedQuery("Driver.FIND_BY_POLICYNUM", Driver.class)
-                .setParameter("policyNum", policyNum)
-                .getResultList();
-    }
-
     @Cacheable(value = "drivers", key = "#licenseNo")
     public Driver loadDriverByLicenseNum(String licenseNum) {
         return entityManager.createNamedQuery("Driver.FIND_BY_LICENSENUM", Driver.class)
@@ -65,16 +58,9 @@ public class PersistenceHelper {
                 .getSingleResult();
     }
 
-    @Cacheable(value = "drivers", key = "#policyNum")
+    @Cacheable(value = "policy-drivers", key = "#policyNum")
     public List<Driver> loadDriverByPolicyNum(String policyNum) {
         return entityManager.createNamedQuery("Driver.FIND_BY_POLICYNUM", Driver.class)
-                .setParameter("policyNum", policyNum)
-                .getResultList();
-    }
-
-    @Cacheable(value = "policy-vehicles")
-    public List<Vehicle> loadVehicles(String policyNum) {
-        return entityManager.createNamedQuery("Vehicle.FIND_BY_POLICYNUM", Vehicle.class)
                 .setParameter("policyNum", policyNum)
                 .getResultList();
     }
@@ -86,7 +72,7 @@ public class PersistenceHelper {
                 .getSingleResult();
     }
 
-    @Cacheable(value = "vehicles", key = "#vin")
+    @Cacheable(value = "policy-vehicles")
     public List<Vehicle> loadVehicleByPolicyNum(String policyNum) {
         return entityManager.createNamedQuery("Vehicle.FIND_BY_POLICYNUM", Vehicle.class)
                 .setParameter("policyNum", policyNum)
