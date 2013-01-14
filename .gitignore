@@ -12,3 +12,5 @@ logs/.DS_Store
 *.db
 
 *.iml
+
+.DS_Store
