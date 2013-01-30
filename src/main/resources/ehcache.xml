@@ -71,24 +71,6 @@
         timeToLiveSeconds="20"
         memoryStoreEvictionPolicy="FIFO"
         eternal="false" 
-        overflowToDisk="false"/>        
-        
-     <cache 
-        name="driving-history-accidents" 
-        maxElementsInMemory="100"
-        timeToIdleSeconds="0"
-        timeToLiveSeconds="20"
-        memoryStoreEvictionPolicy="FIFO"
-        eternal="false" 
-        overflowToDisk="false"/>     
-        
-     <cache 
-        name="accidents" 
-        maxElementsInMemory="100"
-        timeToIdleSeconds="0"
-        timeToLiveSeconds="20"
-        memoryStoreEvictionPolicy="FIFO"
-        eternal="false" 
-        overflowToDisk="false"/>         
-        
+        overflowToDisk="false"/>               
+                   
 </ehcache>
