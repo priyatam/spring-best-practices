@@ -1,7 +1,7 @@
-package github.priyatam.springrest.aop;
+package github.priyatam.springrest.utils.aop;
 
 import github.priyatam.springrest.domain.BaseDomain;
-import github.priyatam.springrest.exception.InvalidTagException;
+import github.priyatam.springrest.utils.exception.InvalidTagException;
 import github.priyatam.springrest.helper.ETagHelper;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -20,6 +20,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+
+/**
+ * Based on http://blog.furiousbob.com/2011/12/06/hateoas-restful-services-using-spring-3-1/
+ */
 
 @Component
 @Aspect

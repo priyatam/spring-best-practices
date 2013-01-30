@@ -51,7 +51,7 @@ public class PersistenceHelper {
                 .getSingleResult();
     }
 
-    @Cacheable(value = "drivers", key = "#licenseNo")
+    @Cacheable(value = "drivers")
     public Driver loadDriverByLicenseNum(String licenseNum) {
         return entityManager.createNamedQuery("Driver.FIND_BY_LICENSENUM", Driver.class)
                 .setParameter("licenseNum", licenseNum)

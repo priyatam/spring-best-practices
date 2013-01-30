@@ -126,7 +126,7 @@
     <!-- Cache -->
     <cache:annotation-driven/>
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
-          p:cache-manager-ref="ehcache"/>
+          p:cacheManager-ref="ehcache"/>
     <bean id="ehcache"
           class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
 

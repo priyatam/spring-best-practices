@@ -6,9 +6,9 @@ import github.priyatam.springrest.domain.Driver;
 import github.priyatam.springrest.domain.DrivingHistory;
 import github.priyatam.springrest.domain.Policy;
 import github.priyatam.springrest.domain.Vehicle;
-import github.priyatam.springrest.exception.InvalidTagException;
-import github.priyatam.springrest.exception.PolicyInvalidException;
-import github.priyatam.springrest.exception.PolicyInvalidException.ErrorCode;
+import github.priyatam.springrest.utils.exception.InvalidTagException;
+import github.priyatam.springrest.utils.exception.PolicyInvalidException;
+import github.priyatam.springrest.utils.exception.PolicyInvalidException.ErrorCode;
 import github.priyatam.springrest.helper.*;
 import github.priyatam.springrest.helper.ResponseBuilderHelper.URLS;
 import github.priyatam.springrest.helper.PolicyAsyncHelper;
@@ -55,7 +55,7 @@ public class PolicyResource {
     @Inject
     protected PersistenceHelper persistenceHelper;
 
-    @Value("${wara.ws.virtualhost}")
+    @Value("${virtualhost}")
     private String vhost;
 
     @RequestMapping(method = RequestMethod.OPTIONS, value = "/policy")

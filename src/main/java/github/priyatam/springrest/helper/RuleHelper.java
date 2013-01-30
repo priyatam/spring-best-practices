@@ -1,7 +1,7 @@
 package github.priyatam.springrest.helper;
 
 import github.priyatam.springrest.domain.Policy;
-import github.priyatam.springrest.exception.PolicyInvalidException.ErrorCode;
+import github.priyatam.springrest.utils.exception.PolicyInvalidException.ErrorCode;
 import com.google.common.base.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

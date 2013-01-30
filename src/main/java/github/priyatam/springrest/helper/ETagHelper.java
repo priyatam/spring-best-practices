@@ -12,7 +12,7 @@ import org.springframework.util.DigestUtils;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import github.priyatam.springrest.exception.InvalidTagException;
+import github.priyatam.springrest.utils.exception.InvalidTagException;
 import com.google.common.collect.Maps;
 
 @Service

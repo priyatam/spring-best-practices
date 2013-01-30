@@ -21,12 +21,12 @@
         <jdbc:script location="classpath:db/data.sql"/>
     </jdbc:initialize-database>
 
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="github.priyatam.springrest.domain"/>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
                 <prop key="hibernate.ejb.naming_strategy">github.priyatam.springrest.utils.CustomHibernateNamingStrategy</prop>
             </props>
         </property>
@@ -40,7 +40,7 @@
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
-          p:entityManagerFactory-ref="entityManagerFactory"/>
+          p:entityManagerFactory-ref="sessionFactory"/>
 
     <!--Enable Spring @Transactional semantics using proxies -->
     <tx:annotation-driven/>
