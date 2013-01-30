@@ -41,25 +41,14 @@ public class MockDataHelper {
 
     public static DrivingHistory createDrivingHistory() {
         return new DrivingHistory.Builder().withAnnualMileage(2000).withIsGarageParked(true).withIsPrimaryOperator(true)
-                .build();
+                .withIsAccident(false).build();
     }
 
     public static DrivingHistory createDrivingHistoryFull(String accident) {
         return new DrivingHistory.Builder().withAnnualMileage(2000).withIsGarageParked(true).withIsPrimaryOperator(true)
-                .withAccidents(Lists.newArrayList(createAccident(accident))).build();
+                .withIsAccident(true).withAccidentTime(new LocalDateTime()).withIsThirdParyOffence(true).build();
     }
 
-    public static Accident createAccident(String name) {
-        return new Accident(name, new LocalDateTime(), true, Accident.AccidentType.MINOR);
-    }
-
-    public static Accident createAccident1() {
-        return new Accident("john-first accident", new LocalDateTime(), true, Accident.AccidentType.MINOR);
-    }
-
-    public static Accident createAccident2() {
-        return new Accident("john-second accident", new LocalDateTime(), true, Accident.AccidentType.MINOR);
-    }
 
     public static Policy createPolicyFull(String licenseNo, String vin, String accident) {
         return new Policy.Builder().withEffectiveDate(new LocalDate()).withExpiryDate(new LocalDate()).withTerm(3)

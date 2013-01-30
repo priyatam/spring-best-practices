@@ -65,13 +65,6 @@ public class DomainTest {
     }
 
     @Test
-    public void testAccident() throws IOException {
-        mapper.writeValue(file("accident.json"), MockDataHelper.createAccident1());
-        Accident accident = mapper.readValue(file("accident.json"), Accident.class);
-        assertNotNull(accident);
-    }
-
-    @Test
     public void testPolicy() throws IOException {
         Policy p = MockDataHelper.createPolicyFull("S123");
         mapper.writeValue(file("policy.json"), p);

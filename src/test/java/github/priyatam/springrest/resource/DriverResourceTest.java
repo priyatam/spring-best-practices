@@ -37,7 +37,7 @@ public class DriverResourceTest {
         mockMvc.perform(
                 get("/driver/lic-1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.licenseNumber").value("lic-1"));
+                .andExpect(jsonPath("$.licenseNum").value("lic-1"));
     }
 
 }
