@@ -1,9 +1,6 @@
 package github.priyatam.springrest.domain;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
@@ -15,6 +12,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @JsonDeserialize(builder = Vehicle.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @NamedQueries({
         @NamedQuery(
@@ -49,6 +47,17 @@ public final class Vehicle extends BaseDomain implements Comparable<Vehicle>, Se
     @Enumerated(EnumType.STRING)
     private final VehicleOwnerType ownerType;
 
+     // Default constructor used by Hibernate
+    private Vehicle() {
+        this.vin = null;
+        this.plateNum = null;
+        this.make = null;
+        this.model = null;
+        this.year = null;
+        this.ownerType = null;
+        this.odomoterReading = null;
+    }
+    
     private Vehicle(Builder builder) {
         this.vin = builder.vin;
         this.plateNum = builder.plateNum;

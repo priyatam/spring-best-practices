@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Objects;
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 @JsonDeserialize(builder = DrivingHistory.Builder.class)
 @Entity
@@ -19,6 +18,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public final class DrivingHistory extends BaseDomain implements Serializable {
 
     private static final long serialVersionUID = 6466627416634621081L;
+
+    public enum AccidentType {
+        MINOR, COLLISION, TOTALED
+    }
 
     // Key
     @Transient
@@ -33,18 +36,34 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
     private final Integer annualMileage;
     private final Boolean isGarageParked;
     private final Boolean isPrimaryOperator;
+    private final Boolean isAccident;
 
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
-    @JoinColumn
-    private final List<Accident> accidents;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    private final LocalDateTime accidentTime;
 
+    private final Boolean isThirdPartyOffence;
+
+    // Default constructor used by Hibernate
+    private DrivingHistory() {
+        this.driverLicense = null;
+        this.purchaseOrLeasedDate = null;
+        this.annualMileage = null;
+        this.isGarageParked = null;
+        this.isPrimaryOperator = null;
+        this.isAccident = null;
+        this.accidentTime = null;
+        this.isThirdPartyOffence = null;  
+    }
+    
     private DrivingHistory(Builder builder) {
         this.driverLicense = builder.driverLicense;
         this.purchaseOrLeasedDate = builder.purchaseOrLeasedDate;
         this.annualMileage = builder.annualMileage;
         this.isGarageParked = builder.isGarageParked;
         this.isPrimaryOperator = builder.isPrimaryOperator;
-        this.accidents = builder.accidents;
+        this.isAccident = builder.isAccident;
+        this.accidentTime = builder.accidentTime;
+        this.isThirdPartyOffence = builder.isThirdPartyOffence;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -55,7 +74,9 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
         private Integer annualMileage;
         private Boolean isGarageParked;
         private Boolean isPrimaryOperator;
-        private List<Accident> accidents;
+        private Boolean isAccident;
+        private LocalDateTime accidentTime;
+        private Boolean isThirdPartyOffence;
 
         public Builder() {
 
@@ -86,8 +107,18 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
             return this;
         }
 
-        public Builder withAccidents(List<Accident> accidents) {
-            this.accidents = accidents;
+        public Builder withIsAccident(boolean isAccident) {
+            this.isAccident = isAccident;
+            return this;
+        }
+
+        public Builder withAccidentTime(LocalDateTime accidentTime) {
+            this.accidentTime = accidentTime;
+            return this;
+        }
+
+        public Builder withIsThirdParyOffence(boolean isThirdPartyOffence) {
+            this.isThirdPartyOffence = isThirdPartyOffence;
             return this;
         }
 
@@ -97,7 +128,7 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
         }
 
         private void validate() {
-            
+
         }
     }
 
@@ -121,9 +152,30 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
         return isPrimaryOperator;
     }
 
-    public List<Accident> getAccidents() {
-        return accidents;
+    public Driver getDriver() {
+        return driver;
     }
+
+    public Boolean getGarageParked() {
+        return isGarageParked;
+    }
+
+    public Boolean getPrimaryOperator() {
+        return isPrimaryOperator;
+    }
+
+    public Boolean getAccident() {
+        return isAccident;
+    }
+
+    public LocalDateTime getAccidentTime() {
+        return accidentTime;
+    }
+
+    public Boolean getThirdPartyOffence() {
+        return isThirdPartyOffence;
+    }
+
 
     // Accident Info
 
@@ -132,6 +184,6 @@ public final class DrivingHistory extends BaseDomain implements Serializable {
     public String toString() {
         return Objects.toStringHelper(this).add("driverLicense", driverLicense)
                 .add("purchaseOrLeasedDate", purchaseOrLeasedDate).add("annualMileage", annualMileage)
-                .add("accidents", accidents).toString();
+                .add("isAccident", isAccident).toString();
     }
 }

@@ -51,6 +51,21 @@ public final class Policy extends BaseDomain implements Comparable<Policy>, Seri
     @OneToMany(mappedBy = "policy", cascade = {CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE})
     private final List<Vehicle> vehicles;
 
+    // Default constructor used by Hibernate
+    private Policy() {
+        this.policyNum = null;
+        this.company = null;
+        this.effectiveDate = null;
+        this.state = null;
+        this.quote = null;
+        this.expiryDate = null;
+        this.term = null;
+        this.declineReason = null;
+        this.agency = null;
+        this.drivers = null;
+        this.vehicles = null;
+    }
+    
 	private Policy(Builder builder) {
 		this.policyNum = builder.policyNum;
 		this.company = builder.company;

@@ -2,6 +2,7 @@ package github.priyatam.springrest.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Objects;
 import com.google.common.collect.ComparisonChain;
@@ -18,6 +19,7 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @JsonDeserialize(builder = Driver.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @NamedQueries({
         @NamedQuery(
@@ -39,13 +41,13 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
     private final String licenseNum;
 
     private final String licenseState;
-       
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")    
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private final LocalDate licenseExpiryDate;
     private final String firstName;
     private final String lastName;
-    
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")    
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private final LocalDate birthDate;
 
     @Enumerated(EnumType.STRING)
@@ -57,7 +59,7 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
     private final Boolean isMarried;
     private final String priorCarrier;
 
-    @OneToOne(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @JoinColumn(name = "addressId")
     private final Address address;
 
@@ -66,9 +68,27 @@ public final class Driver extends BaseDomain implements Comparable<Driver>, Seri
     @JsonIgnore
     private Policy policy;
 
-    // History
-    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private final List<DrivingHistory> drivingHistory;
+
+    // Default constructor used by Hibernate
+    private Driver() {
+        this.licenseNum = null;
+        this.licenseState = null;
+        this.licenseExpiryDate = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.birthDate = null;
+        this.gender = null;
+        this.isMarried = null;
+        this.email = null;
+        this.phone = null;
+        this.occupation = null;
+        this.firstLicenseAtAge = null;
+        this.address = null;
+        this.drivingHistory = null;
+        this.priorCarrier = null;
+    }
 
     private Driver(Builder builder) {
         this.licenseNum = builder.licenseNum;

@@ -27,13 +27,16 @@ public abstract class BaseDomain implements Serializable {
     private Integer version;
 
     @Embedded
-	private final List<Link> links = new LinkedList<Link>();
+	private List<Link> links = new LinkedList<Link>();
 
 	public void addLink(Link link) {
 		this.links.add(link);
 	}
 
 	public List<Link> getLinks() {
+        if (links == null) {
+            links = new LinkedList<Link>();
+        }
 		return links;
 	}
 

@@ -15,17 +15,24 @@ import java.io.Serializable;
 
 @Entity
 @NamedQuery(name = "User.FIND_BY_USERNAME", query = "select o from User o where o.username = :username")
-public class User extends BaseDomain implements Comparable<User>, Serializable {
+public final class User extends BaseDomain implements Comparable<User>, Serializable {
 
     @Column(unique = true)
     @Index(name = "usernameIndex")
-    private String username;
+    private final String username;
 
     @JsonIgnore
-    private String password;
+    private final String password;
 
-    private String role;
+    private final String role;
 
+    // Default constructor used by Hibernate
+    private User() {
+        this.username = null;
+        this.password = null;
+        this.role = null;
+    }
+    
     @JsonCreator
     public User(@JsonProperty("username") String username, @JsonProperty("password") String password,
                 @JsonProperty("role")  String role) {

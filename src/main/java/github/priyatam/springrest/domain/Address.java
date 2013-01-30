@@ -30,6 +30,16 @@ public class Address extends BaseDomain implements Comparable<Address>, Serializ
     @Enumerated(EnumType.STRING)
     private final AddressType type;
 
+    // Default constructor used by Hibernate
+    private Address() {
+       this.addrLine1 = null;
+       this.addrLine2 = null;
+       this.city = null;
+       this.state = null;
+       this.zip = null;
+       this.type = null;
+    }
+    
     @JsonCreator
     public Address(@JsonProperty("addrLine1") String addrLine1, @JsonProperty("addrLine2") String addrLine2,
                    @JsonProperty("city") String city, @JsonProperty("state") String state,
