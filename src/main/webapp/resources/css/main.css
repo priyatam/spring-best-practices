@@ -1,0 +1,22 @@
+
+.summary {
+    width: 100%;
+    border: 1px solid #414f23;
+    border-collapse: collapse;
+}
+
+.summary thead th {
+    border-left: 1px solid #414f23;
+    background: #fff url(../images/th.bg.gif) 0 100% repeat-x;
+    border-bottom: 1px solid #414f23;
+    padding: 6px;
+    text-align: left;
+    font-size: small;
+}
+
+.summary tbody td {
+    border-left: 1px solid #9cac7c;
+    padding: 4px;
+    border-bottom: 1px solid #9cac7c;
+    font-size: 8pt;
+}

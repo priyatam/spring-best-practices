@@ -5,7 +5,9 @@
 	<div class="row-fluid">
 		<div class="span6">
 			<p class="lead">Who We Are</p>
-			    Just your friendly Insurance company that doesn't suck.
+			
+			<p>Just a friendly bunch of guys trying to give you the best auto quote</p>
+
 			</ul>
 			</p>
 		</div>
