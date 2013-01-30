@@ -21,7 +21,7 @@ public class HealthCheck {
 
 	private static final Logger logger = LoggerFactory.getLogger(HealthCheck.class);
 
-	/*@RequestMapping(value = { "", "/", }, method = RequestMethod.GET)
+	@RequestMapping(value = { "", "/", }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> home(Locale locale) {
 		logger.info("Welcome home. The client locale is " + locale.toString());
@@ -29,6 +29,6 @@ public class HealthCheck {
 		String formattedDate = dateFormat.format(new Date());
 		return new ResponseEntity<String>("Welcome, SpringMVC Rest Demo is running. The time on the server is: "
 				+ formattedDate, HttpStatus.OK);
-	}*/
+	}
 
 }
