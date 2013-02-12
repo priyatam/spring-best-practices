@@ -2,28 +2,37 @@ SpringMVC Rest- Best Practices
 =============================
 _Work in Progress_
 
-A full-blown Spring 3.2 reference application with persistence, REST Level-3, asynchronous processing, jobs, security,
-unit and functional tests,  and over 30 "features" and best practices:
+A full-blown, functional, tested Spring 3.2 reference application with JPA persistence, REST Level-3 resources, asynchronous processing, jobs, security, unit, mock, integration, functional, rest client stubs, and performance tests, and many best practices I gathered over several years working in mvc / spring / grails web apps.
+
+# GOALS
 
 ## Domain Modeling
 - Immutable Domain Model with Builder Pattern
-- Jackson Json Annotations
+- Jackson JSON Annotations
 - JPA Annotations
 - Unit Tests
  
 ## REST 
 - REST Errors and Exception Resolver 
 - HATEOAS (REST Level 3)
-- ETags – HTTP Caching & Resource optimistic locking
 
 ## Persistence
 - Transaction Management & Connection Pooling
 - JPA / Hibernate 
 
+## AOP
+- Http ETag management, HTTP Caching & Resource optimistic locking
+
 ## Async
 - Asynchronous processing: Request-Acknowledge-Poll Pattern (Executor Threads)
-- Actors
+- Actors (Akka)
 - Jobs
+
+## Messaging
+- RabbitMQ
+
+## Enterprise Integration
+- Spring Integration (Groovy DSL)
 
 ## Caching
 - Simplified caching using Spring’s new @Cacheable / Eh-Cache
@@ -36,9 +45,10 @@ unit and functional tests,  and over 30 "features" and best practices:
 - Integration Testing (Spring Test, MVC Test)
 - Functional Testing (Groovy / Spock)    
 
-# Use Core Libraries 
+# Libraries Used
 - Spring 3.2, JPA 2, Hibernate 4.1
 - JSP, JQuery, Twitter Bootstrap 2.2
-- H2 database
-- JUnit, Mockito, Spock
+- Akka
+- H2 db (soon, MongoDb?)
+- JUnit, Mockito, Spring Test, Hamcrest, JsonPath, Restito, Spock
 - Google Guava, Joda DateTime, Logback/Slf4j, Jackson Json
