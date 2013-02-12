@@ -51,7 +51,7 @@ public class MockDataHelper {
 
 
     public static Policy createPolicyFull(String licenseNo, String vin, String accident) {
-        return new Policy.Builder().withEffectiveDate(new LocalDate()).withExpiryDate(new LocalDate()).withTerm(3)
+        return new Policy.Builder().withEffectiveDate(new LocalDate("2014-01-01")).withExpiryDate(new LocalDate()).withTerm(3)
                 .withCompany("PlymouthRock").withState("MA").withDeclineReason(null)
                 .withAgency("Commerce").withDrivers(Lists.newArrayList(createDriverFull(licenseNo, accident)))
                 .withVehicles(Lists.newArrayList(createVehicle(vin))).build();
