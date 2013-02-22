@@ -24,15 +24,9 @@ A full-blown, functional, tested Spring 3.2 reference application with JPA persi
 - Http ETag management, HTTP Caching & Resource optimistic locking
 
 ## Async
-- Asynchronous processing: Request-Acknowledge-Poll Pattern (Executor Threads)
+- Asynchronous processing: Request-Acknowledge-Poll Pattern (Fork-Join/Future implemention on REST)
 - Actors (Akka)
 - Jobs
-
-## Messaging
-- RabbitMQ
-
-## Enterprise Integration
-- Spring Integration (Groovy DSL)
 
 ## Caching
 - Simplified caching using Spring’s new @Cacheable / Eh-Cache
@@ -43,7 +37,6 @@ A full-blown, functional, tested Spring 3.2 reference application with JPA persi
 ## Testing
 - Unit Testing (JUnit, Mockito)
 - Integration Testing (Spring Test, MVC Test)
-- Functional Testing (Groovy / Spock)    
 
 # Libraries Used
 - Spring 3.2, JPA 2, Hibernate 4.1
