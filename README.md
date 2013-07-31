@@ -1,6 +1,10 @@
 SpringMVC Rest- Best Practices
-=============================
-_Work in Progress ... To be completed by May 2013_
+==============================
+[Updates 07/13]: I got busy with Python projects. Plan to implement this by mid August.
+
+Work in Progress ...
+
+---
 
 A full-blown, functional, tested Spring 3.2 reference application with JPA persistence, REST Level-3 resources, asynchronous processing, jobs, security, unit, mock, integration, functional, rest client stubs, and performance tests, and many best practices I gathered over several years working in mvc / spring / grails web apps.
 
