@@ -352,6 +352,12 @@
               <artifactId>rest-assured</artifactId>
               <version>1.7.2</version>
               <scope>test</scope>
+              <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
@@ -394,7 +400,7 @@
                     <webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
                     <stopPort>8080</stopPort>
                     <stopKey>c</stopKey>
-                </configuration>              
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -460,4 +466,4 @@
         </plugins>
     </reporting>
 
-</project>   
+</project>
