@@ -28,37 +28,37 @@
 							<legend>Driver Details</legend>
 							<div>
 								<span class="help-block"> Enter your first name </span> 
-								<form:errors path="firstName" />
-								<form:input class="span3" path="firstName" placeholder="First Name" />
+								<form:errors path="driver.firstName" />
+								<form:input class="span3" path="driver.firstName" placeholder="First Name" />
 							</div>
 							<div>
 								<span class="help-block"> Enter your last name</span> 
-								<form:errors path="lastName" />
-                                <form:input class="span3" path="lastName" placeholder="Last Name" />
+								<form:errors path="driver.lastName" />
+                                <form:input class="span3" path="driver.lastName" placeholder="Last Name" />
 							</div>
 							<div>
 								<span class="help-block"> Enter your email </span> 
-								<form:errors path="email" />
-                                <form:input class="span3" path="email" placeholder="name@email.com" />
+								<form:errors path="driver.email" />
+                                <form:input class="span3" path="driver.email" placeholder="name@email.com" />
 							</div>
 							<span class="help-block"> Enter your address </span> 
-							<form:input class="span2" path="addrLine1" />
-							<form:input class="span2" path="addrLine2" />
-                            <form:input class="span2" path="city" /> 
-							<form:input class="span2" path="state" /> 
-                            <form:input class="span1" path="zip" />
+							<form:input class="span2" path="driver.addrLine1" />
+							<form:input class="span2" path="driver.addrLine2" />
+                            <form:input class="span2" path="driver.city" />
+							<form:input class="span2" path="driver.state" />
+                            <form:input class="span1" path="driver.zip" />
 
 							<div style="padding-top: 20px;"></div>
 							<div>
                                 <span class="help-block"> Gender </span> 
-	                            <form:select path="gender" class="span2">
+	                            <form:select path="driver.gender" class="span2">
 	                                <option>Male</option>
 	                                <option selected="selected">Female</option>
                                 </form:select> 
                             </div>
 							<div>
                                 <span class="help-block"> Is Married </span> 
-                                <form:checkbox path="isMarried"/>
+                                <form:checkbox path="driver.isMarried"/>
                             </div>
 							
 							<hr>
@@ -69,7 +69,7 @@
 							</div>
 							<span class="help-block"> Date of Birth </span>
 							<div class="input-append date" id="dp2" data-date-format="mm-dd-yyyy">
-								<form:input class="span2" path="birthDate" size="16" />
+								<form:input class="span2" path="driver.birthDate" size="16" />
 								<span class="add-on"><i class="icon-th"></i></span>
 							</div>
 
@@ -164,7 +164,7 @@
 									<div class="modal hide fade in" id="fnlqtmdl">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal"
-												aria-hidden="true">×</button>
+												aria-hidden="true">ï¿½</button>
 											<h3 id="myModalLabel">Quote for Joan</h3>
 										</div>
 										<div class="modal-body">

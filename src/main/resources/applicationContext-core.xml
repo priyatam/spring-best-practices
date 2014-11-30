@@ -100,28 +100,28 @@
     <bean id="annotationMethodHandlerExceptionResolver"
           class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver"
           p:order="0"/>
-    <bean id="restExceptionResolver"
-          class="com.stormpath.spring.web.servlet.handler.RestExceptionHandler"
-          p:order="100">
-        <property name="messageConverters">
-            <list>
-                <ref bean="jacksonHttpMessageConverter"/>
-            </list>
-        </property>
-        <property name="errorResolver">
-            <bean
-                    class="com.stormpath.spring.web.servlet.handler.DefaultRestErrorResolver"
-                    p:localeResolver-ref="localeResolver">
-                <property name="exceptionMappingDefinitions">
-                    <map>
-                        <entry key="net.prcins.wara.ws.exception.PolicyInvalidException"
-                               value="412, 412XX, _exmsg"></entry>
-                        <entry key="Throwable" value="500, _msg, _exmsg"></entry>
-                    </map>
-                </property>
-            </bean>
-        </property>
-    </bean>
+    <!--<bean id="restExceptionResolver"-->
+          <!--class="com.stormpath.spring.web.servlet.handler.RestExceptionHandler"-->
+          <!--p:order="100">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<ref bean="jacksonHttpMessageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="errorResolver">-->
+            <!--<bean-->
+                    <!--class="com.stormpath.spring.web.servlet.handler.DefaultRestErrorResolver"-->
+                    <!--p:localeResolver-ref="localeResolver">-->
+                <!--<property name="exceptionMappingDefinitions">-->
+                    <!--<map>-->
+                        <!--<entry key="net.prcins.wara.ws.exception.PolicyInvalidException"-->
+                               <!--value="412, 412XX, _exmsg"></entry>-->
+                        <!--<entry key="Throwable" value="500, _msg, _exmsg"></entry>-->
+                    <!--</map>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</property>-->
+    <!--</bean>-->
 
     <!-- Cache -->
     <cache:annotation-driven/>

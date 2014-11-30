@@ -27,9 +27,9 @@
         <jackson.version>2.1.1</jackson.version>
         <junit.version>4.10</junit.version>
         <mockito.version>1.9.5</mockito.version>
-        <slf4j.version>1.7.2</slf4j.version>
-        <logback.version>1.0.7</logback.version>
-        <maven.version.range>[3.0.0,3.1.0)</maven.version.range>
+        <slf4j.version>1.5.6</slf4j.version>
+        <!--<logback.version>1.0.7</logback.version>-->
+        <maven.version.range>[3.0.0,3.3.0)</maven.version.range>
     </properties>
 
     <dependencies>
@@ -213,10 +213,15 @@
             <artifactId>jackson-datatype-guava</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.stormpath.blog</groupId>-->
+            <!--<artifactId>spring-mvc-rest-exhandler</artifactId>-->
+            <!--<version>1.0.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>com.stormpath.blog</groupId>
-            <artifactId>spring-mvc-rest-exhandler</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>com.stormpath.sdk</groupId>
+            <artifactId>stormpath-sdk-api</artifactId>
+            <version>1.0.RC2.1</version>
         </dependency>
 
         <!-- AspectJ / Proxy -->
@@ -276,20 +281,20 @@
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>${slf4j.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>ch.qos.logback</groupId>-->
+            <!--<artifactId>logback-classic</artifactId>-->
+            <!--<version>${logback.version}</version>-->
+        <!--</dependency>-->
 
         <!-- Test -->
         <dependency>
@@ -365,6 +370,18 @@
             <version>6.1.14</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>2.18</version>
+            <type>maven-plugin</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.10.1</version>
+            <type>maven-plugin</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -395,17 +412,17 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.8.v20121106</version>
+                <version>8.1.16.v20140903</version>
                 <configuration>
                     <webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
-                    <stopPort>8080</stopPort>
+                    <stopPort>8081</stopPort>
                     <stopKey>c</stopKey>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.4.3</version>
+                <version>2.18</version>
             </plugin>
             <!-- Ensure correct library versions are used and unnecessary libs are not downloaded -->
             <plugin>
@@ -422,12 +439,12 @@
                             <rules>
                                 <bannedDependencies>
                                     <excludes>
-                                        <exclude>commons-logging:commons-logging</exclude>
+                                        <exclude>commons-logging:commons-logging:jar:1.1*</exclude>
                                         <exclude>commons-digester:commons-digester</exclude>
                                         <exclude>aspectj:aspectj*</exclude>
                                         <exclude>hsqldb:hsqldb</exclude>
-                                        <exclude>log4j:log4j</exclude>
-                                        <exclude>org.slf4j:1.5*</exclude>
+                                        <exclude>log4j:log4j:jar:1.2*</exclude>
+                                        <exclude>org.slf4j:1.7*</exclude>
                                         <exclude>org.springframework:2.*</exclude>
                                         <exclude>org.springframework:3.0.*</exclude>
                                     </excludes>
@@ -436,7 +453,7 @@
                                     <version>${maven.version.range}</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
-                                    <version>1.6</version>
+                                    <version>[1.6, 1.7.0-72, 1.8.0-25]</version>
                                 </requireJavaVersion>
                             </rules>
                             <fail>true</fail>
@@ -453,12 +470,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.11</version>
+                <version>2.18</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.8</version>
+                <version>2.10.1</version>
                 <configuration>
                     <linksource>true</linksource>
                 </configuration>
