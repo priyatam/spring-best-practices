@@ -13,6 +13,9 @@ public class PolicyForm {
 
 	private Date effectiveDate;
 
+	private Driver driver = new Driver();
+	private Vehicle vehicle = new Vehicle();
+
 	@NotEmpty
 	private String state;
 
@@ -42,7 +45,7 @@ public class PolicyForm {
 		@NotEmpty
 		private String priorCarrier;
 
-		private Boolean married;
+		private Boolean isMarried;
 
 		private String addrLine1;
 
@@ -124,12 +127,12 @@ public class PolicyForm {
 			this.priorCarrier = priorCarrier;
 		}
 
-		public Boolean getMarried() {
-			return married;
+		public Boolean getIsMarried() {
+			return isMarried;
 		}
 
-		public void setMarried(Boolean married) {
-			this.married = married;
+		public void setIsMarried(Boolean isMarried) {
+			this.isMarried = isMarried;
 		}
 
 		public String getAddrLine1() {
@@ -313,4 +316,19 @@ public class PolicyForm {
 		this.vehicles = vehicles;
 	}
 
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
 }
